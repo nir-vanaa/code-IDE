@@ -1,71 +1,94 @@
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended'
-  ],
-  ignorePatterns: [
-    '**/ignore/*.js',
-    '.eslintrc.cjs',
-    '*.d.ts',
-    'public',
-    'node_modules',
-    '**/ExperienceEditor/configs/*',
-    '**/ExperienceEditor/stories/*',
-    '**/build/*',
-    '**/*.config.js',
-    'dist',
-    'vite.config.*',
-  ],
+  root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 'latest',
-    ecmaFeatures: {
-      jsx: true,
-    },
     project: './tsconfig.app.json',
     tsconfigRootDir: __dirname,
-  },
-  env: {
-    browser: true,
-    es2020: true,
-  },
-  globals: {
-    browser: true,
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true
+    }
   },
   plugins: [
-    '@typescript-eslint',
+    'react',
     'react-hooks',
-    'react-refresh',
-    'react-compiler',
+    'jsx-a11y',
+    '@typescript-eslint',
     'prettier',
+    'react-refresh'
   ],
-  rules: {
-    'react-compiler/react-compiler': 'error',
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
-    'react/jsx-filename-extension': [
-      1,
-      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
-    ],
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
-    'react/react-in-jsx-scope': 'off',
-    'semi': ['error', 'always'],
-    'import/extensions': [
-      'off',
-      'ignorePackages',
-      {
-        js: 'ignorePackages',
-        ts: 'ignorePackages',
-        jsx: 'ignorePackages',
-        tsx: 'ignorePackages',
-        scss: 'always',
-      },
-    ],
+  extends: [
+    'airbnb',
+    'airbnb-typescript',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:react-hooks/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:prettier/recommended',
+    'prettier'
+  ],
+  env: {
+    browser: true,
+    node: true,
+    es2020: true
   },
+  settings: {
+    react: {
+      version: 'detect'
+    },
+    'import/resolver': {
+      typescript: {
+        project: './tsconfig.app.json'
+      },
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
+      }
+    }
+  },
+  rules: {
+    // ✅ Clean, working rules only
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+
+    // Airbnb overrides
+    'react/jsx-props-no-spreading': 'off',
+    'react/require-default-props': 'off',
+    'import/prefer-default-export': 'off',
+
+    // Base ESLint formatting rules
+    'lines-between-class-members': ['error', 'always'],
+    'no-throw-literal': 'error',
+    'brace-style': ['error', '1tbs'],
+    'comma-dangle': ['error', 'only-multiline'],
+    'comma-spacing': ['error', { before: false, after: true }],
+    'func-call-spacing': ['error', 'never'],
+    'indent': ['error', 2],
+    'keyword-spacing': ['error', { before: true, after: true }],
+    'no-extra-semi': 'error',
+    'space-before-blocks': ['error', 'always'],
+    'quotes': ['error', 'single'],
+    'semi': ['error', 'always'],
+    'space-before-function-paren': [
+      'error',
+      {
+        anonymous: 'never',
+        named: 'never',
+        asyncArrow: 'always'
+      }
+    ],
+    'space-infix-ops': 'error',
+    'object-curly-spacing': ['error', 'always'],
+    'prettier/prettier': ['error']
+  },
+  ignorePatterns: [
+    'dist/**/*',
+    'node_modules/**/*',
+    'public/**/*',
+    '*.config.js',
+    '*.config.ts',
+    '.eslintrc.cjs'
+  ]
 };

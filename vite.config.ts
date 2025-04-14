@@ -3,11 +3,14 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 const ReactCompilerConfig = {
-  /* ... */
+  target: '19'
 };
 
 // https://vite.dev/config/
 export default defineConfig({
+  preview: {
+    port: 5173,
+  },
   plugins: [
     react({
       babel: {
