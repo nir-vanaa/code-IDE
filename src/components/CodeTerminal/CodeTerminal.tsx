@@ -119,19 +119,7 @@ function XTermTerminal() {
         };
     }, []);
 
-    return (
-        <div
-            ref={termRef}
-            style={{
-                width: '100%',
-                height: '100%',
-                // background: '#111',
-                borderRadius: 4,
-                marginTop: 8,
-                overflowY: 'auto',
-            }}
-        />
-    );
+    return <div ref={termRef} className="w-full h-full overflow-y-auto p-2" />;
 }
 
 export default XTermTerminal;

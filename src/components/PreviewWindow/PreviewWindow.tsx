@@ -20,7 +20,7 @@ function PreviewWindow() {
         }
     }, [outputBundle]);
     return (
-        <div className="preview-window w-full h-full">
+        <div className="preview-window h-full m-2">
             <iframe ref={iframeRef} title="Preview" className="w-full h-full" />
         </div>
     );

@@ -5,7 +5,7 @@ import { useShallow } from 'zustand/shallow';
 import { useFileStore } from '../../stores/fileStore';
 import './CodeEditor.css';
 import { buildApp } from './utils/build.utils';
-import { handleEditorWillMount } from './utils/monaco.util';
+import { handleEditorWillMount, handleEditorDidMount } from './utils/monaco.util';
 
 const EXT_TO_LANGUAGE: Record<string, string> = {
     ts: 'typescript',
@@ -63,18 +63,21 @@ function CodeEditor() {
     return (
         <div className="code-editor-container">
             <Editor
-                // height="100vh"
+                className="editor"
+                height="100vh"
                 defaultLanguage={language}
                 language={language}
                 defaultValue={files[currentFile]}
                 value={files[currentFile]}
                 theme="vs-dark"
+                path="file:///main.tsx"
+                // theme="vs-dark"
                 onChange={handleEditorChange}
                 beforeMount={handleEditorWillMount}
-                // onMount={handleEditorDidMount}
+                onMount={handleEditorDidMount}
                 options={{
                     fontFamily: 'Cascadia Code, sans-serif',
-                    fontSize: 12,
+                    fontSize: 14,
                     minimap: { enabled: true },
                     scrollBeyondLastLine: false,
                     automaticLayout: true,

@@ -169,7 +169,12 @@ const buildFile = async (files: Record<string, string>) => {
         // outdir: 'out',
         // minifySyntax: true,
         // minifyWhitespace: true,
-        // external: ['fs'],
+        external: ['fs'],
+        define: {
+            // 'process.env.NODE_ENV': 'production',
+            global: 'window',
+            // process: 'window',
+        },
         plugins: [inlineCssPlugin(files), filePlugin, esmShPathPlugin()],
     });
     const outputText = result.outputFiles?.[0].text;

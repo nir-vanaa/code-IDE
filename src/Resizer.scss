@@ -1,5 +1,5 @@
 .Resizer {
-    background: #000;
+    background: #aaa;
     opacity: 0.2;
     z-index: 1;
     -moz-box-sizing: border-box;
@@ -16,34 +16,112 @@
 }
 
 .Resizer.horizontal {
-    height: 5px;
-    margin: -5px 0;
-    border-top: 2px solid rgba(18, 17, 17, 0);
-    border-bottom: 2px solid rgba(19, 19, 19, 0);
+    height: 3px;
+    // margin: -5px 0;
+    border-top: 2px solid #aaa;
+    border-bottom: 2px solid #aaa;
     cursor: row-resize;
     width: 100%;
 }
 
 .Resizer.horizontal:hover {
-    border-top: 2px solid rgba(0, 0, 0, 0.5);
-    border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+    border-top: 2px solid #aaa;
+    border-bottom: 2px solid #aaa;
 }
 
 .Resizer.vertical {
-    width: 5px;
-    margin: 0 -5px;
-    border-left: 2px solid rgba(20, 20, 20, 1);
-    border-right: 2px solid rgba(61, 59, 59, 1);
+    width: 3px;
+    // margin: 0 -5px;
+    // border-left: 2px solid #aaa;
+    // border-right: 2px solid #aaa;
     cursor: col-resize;
 }
 
 .Resizer.vertical:hover {
-    border-left: 2px solid rgba(22, 21, 21, 0.5);
-    border-right: 2px solid rgba(61, 59, 59, 1);
+    border-left: 2px solid #aaa;
+    border-right: 2px solid #aaa;
 }
 .Resizer.disabled {
     cursor: not-allowed;
 }
 .Resizer.disabled:hover {
     border-color: transparent;
+}
+
+.editor {
+    background: #1e1e1e;
+    color: #d4d4d4;
+}
+
+.editor p {
+    color: #d4d4d4 !important;
+}
+
+.editor .mtk9 {
+    // comments
+    color: #f4f1f1;
+}
+
+.editor .mtk1 {
+    // default text
+    color: #d4d4d4;
+}
+
+.editor .mtk22 {
+    // keywords
+    color: #9cdcfe;
+}
+
+.editor .mtk8 {
+    // numbers
+    color: #569cd6;
+}
+
+.editor .mtk5 {
+    // strings
+    color: #ce9178;
+}
+
+.editor .monaco-editor.showUnused .squiggly-inline-unnecessary {
+    opacity: 0.4;
+}
+
+.editor .jsx-expression-braces {
+    color: #d4d4d4;
+}
+
+.editor .jsx-tag-name.jsx-tag-order-1 {
+    color: #4ec9b0;
+}
+
+.editor .jsx-tag-name.jsx-tag-order-2 {
+    color: #569cd6;
+}
+
+.editor .jsx-tag-angle-bracket {
+    color: #808080;
+}
+
+.editor .jsx-tag-angle-bracket.jsx-tag-order-1 {
+    color: #569cd6;
+}
+
+.editor .jsx-tag-angle-bracket.jsx-tag-order-2 {
+    color: #d7ba7d;
+}
+
+.editor .jsx-tag-angle-bracket.jsx-tag-order-3 {
+    color: #b5cea8;
+}
+
+.editor .jsx-tag-name {
+    color: #569cd6;
+}
+
+.editor .jsx-tag-attribute-key {
+    color: #9cdcfe;
+}
+
+.editor .jsx-text {
+    color: #d4d4d4;
 }

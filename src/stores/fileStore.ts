@@ -1,6 +1,6 @@
-// src/store/useFileStore.ts
-import { create } from 'zustand';
 import localforage from 'localforage';
+import { create } from 'zustand';
+import { initialFileData } from '../data/init-file-data';
 
 type FileSystem = {
     files: Record<string, string>; // file path -> content
@@ -25,40 +25,6 @@ interface FileStore {
     saveFS: () => Promise<void>;
 }
 
-const defaultFS: FileSystem = {
-    files: {
-        '/main.tsx': `import React, { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./src/styles.css";
-import App from "./src/App.tsx";
-
-const root = createRoot(document.getElementById("root"));
-root.render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-)`,
-        '/src/App.tsx': `import "./styles.css";
-
-const App = () => {
-  return <div className="App">Hello world!</div>;
-}
-
-export default App;`,
-        '/src/styles.css': ` body {
-  height: 100%;
-  width: 100%;
- }
- 
- .App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
- }`,
-    },
-    folders: new Set(['/src']),
-};
-
 const useFileStore = create<FileStore>((set, get) => ({
     initializedEsBuild: false,
     setInitializedEsBuild: (initialized) => {
@@ -72,8 +38,8 @@ const useFileStore = create<FileStore>((set, get) => ({
     setOutputBundle: (bundle) => {
         set({ outputBundle: bundle });
     },
-    files: defaultFS.files,
-    folders: defaultFS.folders,
+    files: initialFileData.files,
+    folders: initialFileData.folders,
     setFile: (path, content) => {
         set((state) => ({
             files: { ...state.files, [path]: content },
@@ -141,4 +107,4 @@ const useFileStore = create<FileStore>((set, get) => ({
 
 const FileStoreState = useFileStore.getState;
 
-export { useFileStore, FileStoreState };
+export { FileStoreState, useFileStore };

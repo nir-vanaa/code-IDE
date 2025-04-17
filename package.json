@@ -13,7 +13,8 @@
   "dependencies": {
     "@babel/parser": "^7.27.0",
     "@babel/standalone": "^7.27.0",
-    "@monaco-editor/react": "^4.7.0",
+    "@babel/traverse": "^7.27.0",
+    "@monaco-editor/react": "^4.4.5",
     "@radix-ui/react-context-menu": "^2.2.7",
     "@radix-ui/react-slot": "^1.1.0",
     "@rolldown/browser": "https://pkg.pr.new/@rolldown/browser@4125",
@@ -29,6 +30,7 @@
     "lucide-react": "^0.468.0",
     "monaco-editor": "^0.52.2",
     "monaco-jsx-highlighter": "^2.77.77",
+    "monaco-jsx-syntax-highlight": "^1.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",

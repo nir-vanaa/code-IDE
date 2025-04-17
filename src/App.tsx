@@ -21,14 +21,22 @@ function App() {
                     <FileExplorer />
                     {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
                     {/* @ts-expect-error */}
-                    <SplitPane split="horizontal" minSize="70%">
-                        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                        {/* @ts-expect-error */}
-                        <SplitPane split="vertical" size="60%" minSize="10%" maxSize="100%">
-                            <CodeEditor />
-                            <PreviewWindow />
-                        </SplitPane>
-                        <CodeTerminal />
+                    <SplitPane split="horizontal" minSize="70%" maxSize="100%">
+                        <div>
+                            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                            {/* @ts-expect-error */}
+                            <SplitPane split="vertical" size="60%" minSize="10%" maxSize="100%">
+                                <div className="h-full w-full">
+                                    <CodeEditor />
+                                </div>
+                                <div className="h-full w-full">
+                                    <PreviewWindow />
+                                </div>
+                            </SplitPane>
+                        </div>
+                        <div className="p-2">
+                            <CodeTerminal />
+                        </div>
                     </SplitPane>
                 </SplitPane>
             </div>
