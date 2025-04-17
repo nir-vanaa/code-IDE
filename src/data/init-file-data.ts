@@ -10,7 +10,9 @@ root.render(
   </StrictMode>
 )`;
 
-const appFileData = `import "./styles.css";
+const appFileData = `
+import React from "react";
+import "./styles.css";
 
 const App = () => {
   return (
