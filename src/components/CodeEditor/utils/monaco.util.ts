@@ -1,6 +1,5 @@
 // import * as babel from '@babel/standalone';
 import { Monaco } from '@monaco-editor/react';
-import { editor } from 'monaco-editor';
 // import MonacoJSXHighlighter from 'monaco-jsx-highlighter';
 import { customTheme } from '../customTheme';
 
