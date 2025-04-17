@@ -2,32 +2,28 @@
 import { useEffect, useState } from 'react';
 import { VscRunAll } from 'react-icons/vsc';
 import { useShallow } from 'zustand/shallow';
-import { FileStoreState, useFileStore } from '../../stores/fileStore';
+import { useFileStore } from '../../stores/fileStore';
 
-import { buildFile, initEsBuild } from '../CodeEditor/utils/esbuild';
+import { buildApp } from '../CodeEditor/utils/build.utils';
+import { initEsBuild } from '../CodeEditor/utils/esbuild';
 import { Button } from '../ui/button';
 
 function BuildButton() {
     const [building, setBuilding] = useState(false);
 
-    const [initializedEsBuild, setOutputBundle] = useFileStore(
-        useShallow((s) => [s.initializedEsBuild, s.setOutputBundle]),
-    );
+    const [initializedEsBuild] = useFileStore(useShallow((s) => [s.initializedEsBuild]));
     const handleBuild = async () => {
         setBuilding(true);
         try {
-            const { files } = FileStoreState();
-            const result = await buildFile(files);
-            setOutputBundle(result);
-            return result;
+            await buildApp();
         } finally {
             setBuilding(false);
         }
     };
 
     const handleRun = async () => {
-        const res = await handleBuild();
-        eval(res);
+        await handleBuild();
+        // eval(res);
     };
 
     useEffect(() => {

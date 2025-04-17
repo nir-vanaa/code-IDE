@@ -156,7 +156,7 @@ function FileExplorer() {
     const tree = buildFileTree(files, folders);
 
     const createNewFile = () => {
-        FileStoreState().setFile('/newFile', '');
+        FileStoreState().setFile('/newFile.ts', ' ');
         FileStoreState().saveFS();
     };
 

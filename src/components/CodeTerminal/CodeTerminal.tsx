@@ -101,7 +101,7 @@ function XTermTerminal() {
             fontFamily: 'monospace',
             fontSize: 12,
             cursorBlink: true,
-            rows: 12,
+            // rows: 12,
         });
         xterm.current.open(termRef.current);
         xterm.current.writeln('Type "help" for commands.');

@@ -1,9 +1,11 @@
 import Editor from '@monaco-editor/react';
+import { debounce } from 'lodash';
 import { useCallback, useEffect } from 'react';
 import { useShallow } from 'zustand/shallow';
 import { useFileStore } from '../../stores/fileStore';
-import { handleEditorDidMount, handleEditorWillMount } from './utils/monaco.util';
 import './CodeEditor.css';
+import { buildApp } from './utils/build.utils';
+import { handleEditorDidMount, handleEditorWillMount } from './utils/monaco.util';
 
 const EXT_TO_LANGUAGE: Record<string, string> = {
     ts: 'typescript',
@@ -24,18 +26,24 @@ function CodeEditor() {
     const currentFileExt = currentFile.split('.').pop();
     const language = currentFileExt ? EXT_TO_LANGUAGE[currentFileExt] : 'plaintext';
 
+    const build = useCallback(() => {
+        debounce(buildApp, 1000)();
+    }, []);
+
     useEffect(() => {
         loadFS();
-    }, [loadFS]);
+        build();
+    }, [build, loadFS]);
 
     const handleEditorChange = useCallback(
         (value: string | undefined) => {
             if (value) {
                 setFile(currentFile, value);
                 saveFS();
+                build();
             }
         },
-        [currentFile, setFile, saveFS],
+        [setFile, currentFile, saveFS, build],
     );
 
     useEffect(() => {
@@ -44,6 +52,7 @@ function CodeEditor() {
                 event.preventDefault();
                 console.log('Saving...');
                 saveFS();
+                buildApp();
             }
         };
         window.addEventListener('keydown', handleKeyDown);

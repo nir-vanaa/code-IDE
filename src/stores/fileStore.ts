@@ -27,8 +27,36 @@ interface FileStore {
 
 const defaultFS: FileSystem = {
     files: {
-        '/main.ts': 'console.log("Hello, world!");',
-        '/src/help.ts': '',
+        '/main.tsx': `import React, { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./src/styles.css";
+import App from "./src/App.tsx";
+
+const root = createRoot(document.getElementById("root"));
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+)`,
+        '/src/App.tsx': `import "./styles.css";
+
+const App = () => {
+  return <div className="App">Hello world!</div>;
+}
+
+export default App;`,
+        '/src/styles.css': ` body {
+  height: 100%;
+  width: 100%;
+ }
+ 
+ .App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ } 
+
+}`,
     },
     folders: new Set(['/src']),
 };
@@ -38,7 +66,7 @@ const useFileStore = create<FileStore>((set, get) => ({
     setInitializedEsBuild: (initialized) => {
         set({ initializedEsBuild: initialized });
     },
-    currentFile: '/main.ts',
+    currentFile: '/main.tsx',
     setCurrentFile: (path) => {
         set({ currentFile: path });
     },
@@ -63,7 +91,7 @@ const useFileStore = create<FileStore>((set, get) => ({
     renameFile: (oldPath, newPath) => {
         set((state) => {
             const files = { ...state.files };
-            if (files[oldPath]) {
+            if (oldPath in files) {
                 files[newPath] = files[oldPath];
                 delete files[oldPath];
             }

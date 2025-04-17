@@ -1,8 +1,11 @@
+import SplitPane from 'react-split-pane';
 import './App.scss';
 import BuildButton from './components/BuildButtton/BuildButton';
 import CodeEditor from './components/CodeEditor/CodeEditor';
 import CodeTerminal from './components/CodeTerminal/CodeTerminal';
 import FileExplorer from './components/FileExplorer/FileExplorer';
+import PreviewWindow from './components/PreviewWindow/PreviewWindow';
+import './Resizer.scss';
 
 function App() {
     return (
@@ -12,16 +15,32 @@ function App() {
                 <BuildButton />
             </div>
             <div className="app-body">
+                <SplitPane split="vertical" minSize="250px" maxSize="50%">
+                    <FileExplorer />
+                    <SplitPane split="horizontal" minSize="70%">
+                        <SplitPane split="vertical" size="60%" minSize="10%" maxSize="100%">
+                            <CodeEditor />
+                            <PreviewWindow />
+                        </SplitPane>
+                        <CodeTerminal />
+                    </SplitPane>
+                </SplitPane>
+            </div>
+
+            {/* <div className="app-body">
                 <div className="app-sidebar">
                     <FileExplorer />
                 </div>
                 <div className="app-content">
-                    <CodeEditor />
+                    <div className="flex h-[80%]">
+                        <CodeEditor />
+                        <PreviewWindow />
+                    </div>
                     <div className="app-terminal">
                         <CodeTerminal />
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }
