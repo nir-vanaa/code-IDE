@@ -32,7 +32,6 @@ function CodeEditor() {
 
     useEffect(() => {
         loadFS();
-        build();
     }, [build, loadFS]);
 
     const handleEditorChange = useCallback(

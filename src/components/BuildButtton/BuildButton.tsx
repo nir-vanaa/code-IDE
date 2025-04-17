@@ -27,7 +27,9 @@ function BuildButton() {
     };
 
     useEffect(() => {
-        initEsBuild();
+        initEsBuild().then(() => {
+            setTimeout(() => buildApp(), 1000);
+        });
     }, []);
 
     const disableBuildButton = !initializedEsBuild || building;

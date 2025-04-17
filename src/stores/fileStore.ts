@@ -54,9 +54,7 @@ export default App;`,
   display: flex;
   justify-content: center;
   align-items: center;
- } 
-
-}`,
+ }`,
     },
     folders: new Set(['/src']),
 };
@@ -66,7 +64,7 @@ const useFileStore = create<FileStore>((set, get) => ({
     setInitializedEsBuild: (initialized) => {
         set({ initializedEsBuild: initialized });
     },
-    currentFile: '/main.tsx',
+    currentFile: '/src/App.tsx',
     setCurrentFile: (path) => {
         set({ currentFile: path });
     },

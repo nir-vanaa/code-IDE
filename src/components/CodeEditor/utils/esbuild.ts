@@ -18,11 +18,13 @@ const initEsBuild = async () => {
         worker: true,
     });
     FileStoreState().setInitializedEsBuild(true);
+    console.log('Esbuild initialized');
 };
 
 const generateFilePlugin = (files: Record<string, string>): Plugin => ({
     name: 'file-plugin',
     setup(build) {
+        // eslint-disable-next-line consistent-return
         build.onResolve({ filter: /.*/ }, (args) => {
             if (args.path.startsWith('.')) {
                 const resolved = new URL(args.path, `file://${args.resolveDir}/`).pathname;
@@ -33,10 +35,10 @@ const generateFilePlugin = (files: Record<string, string>): Plugin => ({
             if (files[args.path]) {
                 return { path: args.path, namespace: 'file' };
             }
-            return {};
             // Do not return external: true!
             // Just return nothing so the next plugin can try
         });
+        // eslint-disable-next-line consistent-return
         build.onLoad({ filter: /.*/ }, (args) => {
             if (files[args.path]) {
                 const ext = args.path.split('.').pop();
@@ -50,7 +52,6 @@ const generateFilePlugin = (files: Record<string, string>): Plugin => ({
                     loader,
                 };
             }
-            return {};
         });
     },
 });
@@ -104,7 +105,7 @@ const esmShPathPlugin = (): Plugin => ({
             namespace: 'esm-sh',
         }));
 
-        // Relative imports inside esm.sh modules (shouldn't happen with ?bundle, but just in case)
+        // Relative imports inside esm.sh modules
         build.onResolve({ filter: /^\.+\// }, (args) => ({
             path: new URL(args.path, `${args.importer}/`).href,
             namespace: 'esm-sh',
@@ -121,8 +122,8 @@ const esmShPathPlugin = (): Plugin => ({
             if (ext === 'ts') loader = 'ts';
             else if (ext === 'tsx') loader = 'tsx';
             else if (ext === 'jsx') loader = 'jsx';
+            else if (ext === 'css') loader = 'css';
             else if (ext === 'mjs') loader = 'js';
-            // else if (ext === 'css') loader = 'css';
             return { contents: text, loader };
         });
     },
@@ -165,6 +166,7 @@ const buildFile = async (files: Record<string, string>) => {
         format: 'esm',
         // splitting: true,
         // sourcemap: 'external',
+        // outdir: 'out',
         // minifySyntax: true,
         // minifyWhitespace: true,
         // external: ['fs'],
