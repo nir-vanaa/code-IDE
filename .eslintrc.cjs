@@ -65,7 +65,7 @@ module.exports = {
     'comma-dangle': ['error', 'only-multiline'],
     'comma-spacing': ['error', { before: false, after: true }],
     'func-call-spacing': ['error', 'never'],
-    'indent': ['error', 2],
+    'indent': ['error', 4],
     'keyword-spacing': ['error', { before: true, after: true }],
     'no-extra-semi': 'error',
     'space-before-blocks': ['error', 'always'],
@@ -81,7 +81,15 @@ module.exports = {
     ],
     'space-infix-ops': 'error',
     'object-curly-spacing': ['error', 'always'],
-    'prettier/prettier': ['error']
+    'prettier/prettier': ['error'],
+    // "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    'jsx-a11y/no-static-element-interactions': "off",
+    'jsx-a11y/click-events-have-key-events': "off",
+    "@typescript-eslint/no-misused-promises": ["error", {
+      checksVoidReturn: false,
+    }],
   },
   ignorePatterns: [
     'dist/**/*',

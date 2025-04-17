@@ -1,0 +1,83 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+
+  .app-header {
+    padding: 0.5rem;
+    background-color: #1e1e1e;
+    color: white;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    p {
+      margin: 0.5rem 0 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  }
+
+  .app-body {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    overflow: hidden;
+
+    .app-sidebar {
+      width: 250px;
+      min-width: 250px; // Commenting out min-width
+      background-color: #252526;
+      color: white;
+      // padding: 1rem 0.5rem;
+      // overflow-y: auto;
+      border-right: 1px solid #333;
+      overflow: hidden;
+
+      h2 {
+        font-size: 1.2rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+    }
+
+    .app-content {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background-color: #1e1e1e;
+      color: white;
+
+      h2 {
+        padding: 0.5rem 1rem;
+        margin: 0;
+        font-size: 1.2rem;
+        border-bottom: 1px solid #333;
+      }
+
+      .code-editor-container {
+        flex: 1;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .app-terminal {
+    height: 150px;
+    padding: 0.3rem 1rem;
+    background-color: #1e1e1e;
+    color: white;
+    font-size: 0.8rem;
+    // text-align: center;
+    border-top: 1px solid #333;
+  }
+}
