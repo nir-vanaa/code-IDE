@@ -5,7 +5,7 @@ import { useShallow } from 'zustand/shallow';
 import { useFileStore } from '../../stores/fileStore';
 import './CodeEditor.css';
 import { buildApp } from './utils/build.utils';
-import { handleEditorDidMount, handleEditorWillMount } from './utils/monaco.util';
+import { handleEditorWillMount } from './utils/monaco.util';
 
 const EXT_TO_LANGUAGE: Record<string, string> = {
     ts: 'typescript',
@@ -72,7 +72,7 @@ function CodeEditor() {
                 theme="vs-dark"
                 onChange={handleEditorChange}
                 beforeMount={handleEditorWillMount}
-                onMount={handleEditorDidMount}
+                // onMount={handleEditorDidMount}
                 options={{
                     fontFamily: 'Cascadia Code, sans-serif',
                     fontSize: 12,

@@ -1,6 +1,5 @@
 // import * as babel from '@babel/standalone';
 import { Monaco } from '@monaco-editor/react';
-import { editor } from 'monaco-editor';
 // import MonacoJSXHighlighter from 'monaco-jsx-highlighter';
 import { customTheme } from '../customTheme';
 
@@ -78,8 +77,8 @@ const handleEditorWillMount = (monaco: Monaco) => {
     );
 };
 
-const handleEditorDidMount = (monacoEditor: editor.IStandaloneCodeEditor, monaco: Monaco) => {
-    // initMonacoEditor(monacoEditor, monaco);
-};
+// const handleEditorDidMount = (monacoEditor: editor.IStandaloneCodeEditor, monaco: Monaco) => {
+//     // initMonacoEditor(monacoEditor, monaco);
+// };
 
-export { handleEditorWillMount, handleEditorDidMount };
+export { handleEditorWillMount };

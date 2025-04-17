@@ -9,6 +9,8 @@ const buildApp = async () => {
         return result;
     } catch (error) {
         console.error('Error building app:', { error });
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         setOutputBundle(`document.write('${error.message}');`);
         return '';
     } finally {
