@@ -78,8 +78,8 @@ const handleEditorWillMount = (monaco: Monaco) => {
     );
 };
 
-const handleEditorDidMount = (monacoEditor: editor.IStandaloneCodeEditor, monaco: Monaco) => {
-    // initMonacoEditor(monacoEditor, monaco);
-};
+// const handleEditorDidMount = (monacoEditor: editor.IStandaloneCodeEditor, monaco: Monaco) => {
+//     // initMonacoEditor(monacoEditor, monaco);
+// };
 
-export { handleEditorWillMount, handleEditorDidMount };
+export { handleEditorWillMount };

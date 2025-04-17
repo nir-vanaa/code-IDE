@@ -15,9 +15,15 @@ function App() {
                 <BuildButton />
             </div>
             <div className="app-body">
+                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                {/* @ts-expect-error */}
                 <SplitPane split="vertical" minSize="250px" maxSize="50%">
                     <FileExplorer />
+                    {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                    {/* @ts-expect-error */}
                     <SplitPane split="horizontal" minSize="70%">
+                        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                        {/* @ts-expect-error */}
                         <SplitPane split="vertical" size="60%" minSize="10%" maxSize="100%">
                             <CodeEditor />
                             <PreviewWindow />
