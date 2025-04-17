@@ -1,50 +1,107 @@
-# React + TypeScript + Vite
+# Code IDE
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Version](https://img.shields.io/badge/version-0.0.1-green.svg)
 
-Currently, two official plugins are available:
+A modern, web-based code editor environment built with React, TypeScript, and Monaco Editor. This lightweight IDE provides a seamless development experience directly in your browser.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **File Explorer**: Browse, create, rename, and manage your project files and folders
+- **Monaco Code Editor**: Enjoy powerful code editing with syntax highlighting and auto-completion
+- **Live Preview**: See your web application render in real-time as you code
+- **Terminal**: Execute commands and view build output in the integrated terminal
+- **Build System**: Compile and bundle your code with ESBuild integration
+- **Multi-pane Layout**: Flexible, resizable split-pane interface
+- **Theme Support**: Custom dark theme with syntax highlighting
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tech Stack
 
-- Configure the top-level `parserOptions` property like this:
+- **Frontend**: React 19, TypeScript
+- **Build Tools**: Vite, ESBuild
+- **Editor**: Monaco Editor
+- **Styling**: Tailwind CSS, SCSS
+- **State Management**: Zustand
+- **Terminal**: XTerm.js
+- **Code Bundling**: ESBuild
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18.x or higher
+- npm or pnpm
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/code-IDE.git
+cd code-IDE
+
+# Install dependencies
+npm install
+# or with pnpm
+pnpm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Development
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+# Start the development server
+npm run dev
+# or with pnpm
+pnpm dev
 ```
+
+The application will be available at `http://localhost:5173`.
+
+### Building for Production
+
+```bash
+# Build the application
+npm run build
+# or with pnpm
+pnpm build
+
+# Preview the production build
+npm run preview
+# or with pnpm
+pnpm preview
+```
+
+## Usage
+
+1. **Creating Files**: Use the "+" icon in the File Explorer section to create new files
+2. **Creating Folders**: Use the folder icon to create new directories
+3. **Editing Code**: Click on any file to open it in the Monaco editor
+4. **Running the App**: Click the Run button (▶️) to build and preview your application
+5. **Terminal Commands**: Use the integrated terminal to run commands like `build`, `run`, `ls`, etc.
+
+## Project Structure
+
+```
+code-IDE/
+├── public/            # Static assets
+├── src/
+│   ├── components/    # React components
+│   │   ├── BuildButton/
+│   │   ├── CodeEditor/
+│   │   ├── CodeTerminal/
+│   │   ├── FileExplorer/
+│   │   ├── PreviewWindow/
+│   │   └── ui/        # Reusable UI components
+│   ├── lib/           # Utility functions
+│   ├── stores/        # State management
+│   ├── App.tsx        # Main application component
+│   └── main.tsx       # Application entry point
+└── package.json       # Project dependencies
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
