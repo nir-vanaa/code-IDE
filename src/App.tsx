@@ -1,33 +1,48 @@
-import { useState } from 'react'
-import './App.css'
+import SplitPane from 'react-split-pane';
+import './App.scss';
+import BuildButton from './components/BuildButtton/BuildButton';
+import CodeEditor from './components/CodeEditor/CodeEditor';
+import CodeTerminal from './components/CodeTerminal/CodeTerminal';
+import FileExplorer from './components/FileExplorer/FileExplorer';
+import PreviewWindow from './components/PreviewWindow/PreviewWindow';
+import './Resizer.scss';
 
 function App() {
-  const [count, setCount] = useState(0)
+    return (
+        <div className="app-container">
+            <div className="app-header">
+                <h2>Code Editor</h2>
+                <BuildButton />
+            </div>
+            <div className="app-body">
+                <SplitPane split="vertical" minSize="250px" maxSize="50%">
+                    <FileExplorer />
+                    <SplitPane split="horizontal" minSize="70%">
+                        <SplitPane split="vertical" size="60%" minSize="10%" maxSize="100%">
+                            <CodeEditor />
+                            <PreviewWindow />
+                        </SplitPane>
+                        <CodeTerminal />
+                    </SplitPane>
+                </SplitPane>
+            </div>
 
-  return (
-    <>
-      <div>
-        {/* <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a> */}
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+            {/* <div className="app-body">
+                <div className="app-sidebar">
+                    <FileExplorer />
+                </div>
+                <div className="app-content">
+                    <div className="flex h-[80%]">
+                        <CodeEditor />
+                        <PreviewWindow />
+                    </div>
+                    <div className="app-terminal">
+                        <CodeTerminal />
+                    </div>
+                </div>
+            </div> */}
+        </div>
+    );
 }
 
-export default App
+export default App;

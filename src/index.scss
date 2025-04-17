@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import url("https://fonts.cdnfonts.com/css/cascadia-code");
+
+:root {
+  font-family: "Plus Jakarta Sans", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-optical-sizing: auto;
+
+  color-scheme: light dark;
+  background-color: #242424;
+
+  /* color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424; */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+}
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #0a0a0a;
+    --card: #ffffff;
+    --card-foreground: #0a0a0a;
+    --popover: #ffffff;
+    --popover-foreground: #0a0a0a;
+    --primary: #1a1a1a;
+    --primary-foreground: #fafafa;
+    --secondary: #f5f5f5;
+    --secondary-foreground: #1a1a1a;
+    --muted: #f5f5f5;
+    --muted-foreground: #737373;
+    --accent: #f5f5f5;
+    --accent-foreground: #1a1a1a;
+    --destructive: #e63946;
+    --destructive-foreground: #fafafa;
+    --border: #e0e0e0;
+    --input: #e0e0e0;
+    --ring: #0a0a0a;
+    --chart-1: #ff6b6b;
+    --chart-2: #4ecdc4;
+    --chart-3: #1a535c;
+    --chart-4: #ff9f1c;
+    --chart-5: #ff6b6b;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: #0a0a0a;
+    --foreground: #fafafa;
+    --card: #0a0a0a;
+    --card-foreground: #fafafa;
+    --popover: #0a0a0a;
+    --popover-foreground: #fafafa;
+    --primary: #fafafa;
+    --primary-foreground: #1a1a1a;
+    --secondary: #262626;
+    --secondary-foreground: #fafafa;
+    --muted: #262626;
+    --muted-foreground: #a3a3a3;
+    --accent: #262626;
+    --accent-foreground: #fafafa;
+    --destructive: #d62828;
+    --destructive-foreground: #fafafa;
+    --border: #262626;
+    --input: #262626;
+    --ring: #d9d9d9;
+    --chart-1: #3a86ff;
+    --chart-2: #8338ec;
+    --chart-3: #ff006e;
+    --chart-4: #fb5607;
+    --chart-5: #ffbe0b;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
