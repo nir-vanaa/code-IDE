@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { SiTypescript, SiJavascript, SiCss3, SiHtml5 } from 'react-icons/si';
 import { LiaReact } from 'react-icons/lia';
 import { VscJson, VscNewFile, VscNewFolder } from 'react-icons/vsc';
@@ -67,16 +67,28 @@ function FileTreeNode({
     const [open, setOpen] = useState(true);
     const [rename, setRename] = useState(false);
     const [newName, setNewName] = useState(node.name);
+    const renameInpRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (renameInpRef.current) {
+            setTimeout(() => {
+                renameInpRef.current?.focus();
+                // renameInpRef.current?.setSelectionRange(newName.length, newName.length);
+            }, 0);
+        }
+    }, [newName.length, rename]);
 
     const handleRename = () => {
         setRename(true);
     };
     const handleRenameBlur = () => {
-        if (rename) {
+        if (rename && newName.trim() !== '') {
             FileStoreState().renameFile(node.path, `/${newName}`);
             FileStoreState().saveFS();
-            setRename(false);
+        } else {
+            setNewName(node.name);
         }
+        setRename(false);
     };
 
     const handleDelete = () => {
@@ -126,9 +138,7 @@ function FileTreeNode({
             >
                 {rename ? (
                     <input
-                        ref={(rf) => {
-                            rf?.focus();
-                        }}
+                        ref={renameInpRef}
                         value={newName}
                         onBlur={handleRenameBlur}
                         onKeyDown={(e) => {

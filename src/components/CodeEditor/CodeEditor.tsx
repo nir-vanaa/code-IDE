@@ -71,7 +71,6 @@ function CodeEditor() {
                 value={files[currentFile]}
                 theme="vs-dark"
                 path="file:///main.tsx"
-                // theme="vs-dark"
                 onChange={handleEditorChange}
                 beforeMount={handleEditorWillMount}
                 onMount={handleEditorDidMount}

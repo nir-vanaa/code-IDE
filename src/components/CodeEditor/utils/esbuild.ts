@@ -90,14 +90,47 @@ const generateFilePlugin = (files: Record<string, string>): Plugin => ({
 //     },
 // });
 
+// In-memory cache for unpkg/esm.sh modules
+const unpkgCache: Record<string, string> = {};
+
+function getLoader(path: string): 'js' | 'jsx' | 'ts' | 'tsx' | 'css' {
+    const ext = path.split('.').pop();
+    if (ext === 'ts') return 'ts';
+    if (ext === 'tsx') return 'tsx';
+    if (ext === 'jsx') return 'jsx';
+    if (ext === 'css') return 'css';
+    return 'js';
+}
+
 const esmShPathPlugin = (): Plugin => ({
     name: 'esm-sh-path-plugin',
     setup(build) {
-        // Bare imports (e.g. 'react', 'react-dom/client')
-        build.onResolve({ filter: /^[^./].*/ }, (args) => ({
-            path: `https://esm.sh/${args.path}?bundle`,
-            namespace: 'esm-sh',
-        }));
+        build.onResolve({ filter: /^[^./].*/ }, (args) => {
+            const { path } = args;
+            if (path === 'react') {
+                return {
+                    path: 'https://unpkg.com/react@19.1.0/index.js?module',
+                    namespace: 'esm-sh',
+                };
+            }
+            if (path === 'react-dom') {
+                return {
+                    path: 'https://unpkg.com/react-dom@19.1.0/index.js?module',
+                    namespace: 'esm-sh',
+                };
+            }
+            if (path === 'react-dom/client') {
+                return {
+                    path: 'https://unpkg.com/react-dom@19.1.0/client.js?module',
+                    namespace: 'esm-sh',
+                };
+            }
+            // Default: use esm.sh for other bare imports
+            return {
+                path: `https://esm.sh/${path}?bundle`,
+                namespace: 'esm-sh',
+            };
+        });
 
         // esm.sh absolute imports (e.g. /react@19.1.0/es2022/react.bundle.mjs)
         build.onResolve({ filter: /^\/.*\.mjs$/ }, (args) => ({
@@ -111,20 +144,22 @@ const esmShPathPlugin = (): Plugin => ({
             namespace: 'esm-sh',
         }));
 
-        // Load from esm.sh
+        // Load from esm.sh or unpkg with in-memory cache
         build.onLoad({ filter: /.*/, namespace: 'esm-sh' }, async (args) => {
+            if (unpkgCache[args.path]) {
+                return {
+                    contents: unpkgCache[args.path],
+                    loader: getLoader(args.path),
+                };
+            }
             const res = await fetch(args.path);
             if (!res.ok) throw new Error(`Failed to fetch ${args.path}`);
             const text = await res.text();
-            // Guess loader
-            const ext = args.path.split('.').pop();
-            let loader: 'js' | 'jsx' | 'ts' | 'tsx' | 'css' = 'js';
-            if (ext === 'ts') loader = 'ts';
-            else if (ext === 'tsx') loader = 'tsx';
-            else if (ext === 'jsx') loader = 'jsx';
-            else if (ext === 'css') loader = 'css';
-            else if (ext === 'mjs') loader = 'js';
-            return { contents: text, loader };
+            unpkgCache[args.path] = text;
+            return {
+                contents: text,
+                loader: getLoader(args.path),
+            };
         });
     },
 });
